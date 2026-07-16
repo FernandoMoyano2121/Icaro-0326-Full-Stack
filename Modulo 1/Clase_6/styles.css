@@ -1,0 +1,139 @@
+.button {
+  border: none;
+  width: 100px;
+  padding: 5px;
+  border-radius: 4px;
+  background-color: bisque;
+  cursor: pointer;
+}
+/********************* HOVER  *******************/
+
+.button:hover {
+  background-color: #d5b997;
+}
+/********************* ACTIVE  *******************/
+.button:active {
+  background-color: #926d3f;
+}
+
+/******************************* FOCUS *************************/
+
+input {
+  border: 2px solid #d0cfcf;
+  outline: none;
+}
+
+/* input:focus {
+  border: 2px solid #d5b997;
+}
+ */
+
+/************************* VALID E INVALID *******************/
+
+input:invalid {
+  outline: none;
+  border-color: red;
+}
+
+input:valid {
+  outline: none;
+  border-color: green;
+}
+
+/****************** PSEUDOCLASES DE POSICIÓN ****************/
+
+ul li {
+  list-style: none;
+}
+
+ul li:first-child {
+  color: blue;
+}
+
+ul li:last-child {
+  color: red;
+}
+
+ul li:nth-child(3) {
+  color: violet;
+}
+
+/* ******************** PESUDOELEMENTOS ***************************** */
+
+h1::before {
+  content: " ▷ ";
+  color: rgb(11, 118, 83);
+}
+
+h1::after {
+  content: " 🟡 ";
+  color: rgb(11, 118, 83);
+}
+
+.texto2::first-letter {
+  color: red;
+  font-size: 30px;
+}
+
+.texto2::selection {
+  background-color: yellow;
+}
+
+/******************** TRANSICIONES Y TRANSFORMACIONES ***********************/
+
+/* .button1 {
+  border: none;
+  width: 100px;
+  padding: 8px;
+  border-radius: 4px;
+  background-color: #734711;
+  color: white;
+  cursor: pointer;
+  transition:
+    padding 1.2s ease,
+    background-color 1.2s ease;
+} */
+
+/* .button1:hover {
+  background-color: #77654e;
+  padding: 1rem;
+} */
+
+/**************************** ANIMACIONES *****************************/
+
+.contenedor {
+  display: flex;
+  /*  justify-content: center; */
+  align-items: center;
+  width: 400px;
+  height: 300px;
+  background-color: gray;
+  position: relative;
+}
+
+.ball {
+  width: 60px;
+  height: 60px;
+  background-color: aquamarine;
+  border-radius: 50%;
+  position: absolute;
+  animation: mover 3s 2 ease-in-out;
+}
+
+@keyframes mover {
+  0% {
+    left: 160px;
+  }
+
+  /*   50% {
+    left: 80px;
+  }
+
+  70% {
+    left: 80px;
+  }
+
+  100% {
+    right: 50px;
+  } */
+}

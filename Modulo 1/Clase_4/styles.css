@@ -1,0 +1,82 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.padre {
+  height: 700px;
+  display: flex;
+  background-color: #026f83;
+  padding: 1rem;
+  /************************ Wrap **********************/
+
+  /* flex-wrap: nowrap; */
+  /* flex-wrap: wrap; */
+
+  /****************** direcciónamiento **************/
+  flex-direction: row;
+  /*   flex-direction: row-reverse; */
+  /* flex-direction: column; */
+  /*  flex-direction: column-reverse; */
+
+  /***************** Eje principal ******************/
+
+  /* justify-content: start; */
+  /* justify-content: center; */
+  /* justify-content: end; */
+  /* justify-content: space-around; */
+  /* justify-content: space-evenly; */
+  /* justify-content: space-between; */
+
+  /****************** Eje Secundario ****************/
+
+  /* align-items: end; */
+  /* align-items: end; */
+
+  /**************** Alineacion del contenido **********/
+
+  /* align-content: flex-start; */
+  /* align-content: center; */
+  /* align-content: end; */
+}
+
+.hijo {
+  width: 100px;
+  height: 100px;
+  margin: 1rem;
+  background-color: antiquewhite;
+  text-align: center;
+}
+
+/*********************** align self *****************/
+/* .hijo1 {
+  align-self: center;
+  align-self: flex-end;
+} */
+
+/* ******************** flex-grow *****************/
+
+.hijo1 {
+  flex-grow: 1;
+}
+
+.hijo2 {
+  flex-grow: 2;
+}
+.hijo4 {
+  flex-grow: 2;
+}
+.hijo5 {
+  flex-grow: 2;
+}
+
+/* ******************* flex-shrink *****************/
+
+.hijo1 {
+  flex-shrink: 0;
+}
+
+.hijo3 {
+  flex-shrink: 2;
+}

@@ -1,0 +1,17 @@
+:root {
+  --bs-secondary-rgb: rgb(222, 87, 182);
+}
+
+.text-secondary {
+  color: var(--bs-secondary-rgb);
+}
+
+.responsive {
+  background-color: chocolate;
+}
+
+@media (width >= 800px) {
+  .responsive {
+    background-color: beige;
+  }
+}

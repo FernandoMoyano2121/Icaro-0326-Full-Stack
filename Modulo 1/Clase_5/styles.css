@@ -1,0 +1,60 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.grid-container {
+  height: 900px;
+  display: grid;
+  background-color: gray;
+  padding: 2rem;
+  border: 1px solid black;
+  /* Columnas */
+  grid-template-columns: 300px 200px 300px;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: repeat(3, 200px);
+  grid-template-columns: repeat(3, 100px);
+
+  /* Filas */
+  grid-template-rows: 200px 200px;
+  gap: 1rem;
+
+  /* Eje horizontal dentro de la celda */
+
+  justify-items: center;
+  /* justify-items: end; */
+  /* justify-items: start; */
+
+  /* Eje horizontal dentro de la celda */
+
+  /*  align-items: center; */
+  /* align-items: end; */
+  /*  align-items: start; */
+
+  /* Alineación del contenido en el eje horizontal */
+  justify-content: center;
+  justify-content: end;
+  justify-content: start;
+
+  /* Alineación del contenido en el eje vertical */
+  align-content: center;
+  align-content: end;
+  align-content: start;
+}
+.grid-item {
+  width: 50px;
+  padding: 1rem;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: tomato;
+}
+
+.hijo1 {
+  align-content: center;
+}
+
+.hijo1 {
+  display: flex;
+  align-items: center;
+}
