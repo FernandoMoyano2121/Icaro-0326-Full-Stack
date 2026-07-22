@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Bootstrap 5.3 (CSS compilado desde CDN, sin acceso a variables Sass) -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+
+    <!-- Bootstrap Icons: set de iconos liviano, ideal para redes sociales del footer -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+
+    <!-- Nuestra hoja de estilos: SIEMPRE después de bootstrap.min.css para poder sobrescribirlo -->
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <title>Aurum Studio | Landing Page</title>
+  </head>
+  <body>
+    <!-- Enlace de salto para usuarios de teclado / lectores de pantalla (accesibilidad) -->
+    <a class="visually-hidden-focusable skip-link" href="#contenido-principal">Saltar al contenido principal</a>
+
+    <header>
+      <!-- ============ MENÚ DE NAVEGACIÓN ============ -->
+      <!-- BEM: bloque "site-nav" -> únicamente pisa las variables de color del navbar de Bootstrap -->
+      <nav class="navbar navbar-expand-lg site-nav" aria-label="Navegación principal">
+        <div class="container">
+          <!-- Logo textual, a la izquierda por orden natural del DOM -->
+          <!-- BEM: bloque "logo" (independiente y reutilizable) + elemento "logo__accent" -->
+          <a class="navbar-brand logo" href="#inicio">Aurum<span class="logo__accent">Studio</span></a>
+
+          <!-- Botón hamburguesa para mobile, componente estándar de Bootstrap -->
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarMenu"
+            aria-controls="navbarMenu"
+            aria-expanded="false"
+            aria-label="Abrir menú de navegación"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <!-- Enlaces a la derecha: ms-auto (margin-left auto) los empuja al extremo derecho -->
+          <div class="collapse navbar-collapse" id="navbarMenu">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#inicio">Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#servicios">Servicios</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#trabajo">Nosotros</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#contacto">Contacto</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <!-- ============ HERO ============ -->
+      <!-- BEM: bloque "hero" + elementos "hero__title" y "hero__text" -->
+      <div class="hero" id="inicio">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-7">
+              <h1 class="hero__title">Diseñamos experiencias digitales que perduran</h1>
+              <p class="hero__text">
+                En Aurum Studio combinamos diseño, tecnología y estrategia para ayudar a marcas
+                ambiciosas a crecer en el mundo digital.
+              </p>
+              <!-- CTA: btn (Bootstrap) + btn--brand (nuestro modificador de color, mismo esquema del navbar) -->
+              <a href="#contacto" class="btn btn--brand btn-lg">Solicitar propuesta</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="contenido-principal">
+      <!-- ============ SECCIÓN 1: SERVICIOS (Bootstrap row/col + tarjetas en flexbox) ============ -->
+      <!-- BEM: bloque "section" + modificador "section--services" -->
+      <section id="servicios" class="section section--services" aria-labelledby="servicios-titulo">
+        <div class="container">
+          <h2 id="servicios-titulo" class="section__title">Nuestros servicios</h2>
+
+          <!-- Estructura general (fila y 3 columnas) resuelta con el grid de Bootstrap -->
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+              <!-- BEM: bloque "service-card" (la maquetación interna se resuelve con flexbox en CSS plano) -->
+              <article class="service-card">
+                <img
+                  src="https://picsum.photos/seed/aurum-uiux/600/400"
+                  class="service-card__image"
+                  alt="Pantallas de una interfaz digital representando diseño UI/UX"
+                  loading="lazy"
+                />
+                <div class="service-card__body">
+                  <h3 class="service-card__title">Diseño UI/UX</h3>
+                  <p class="service-card__text">
+                    Interfaces claras y atractivas, pensadas para que cada usuario encuentre
+                    lo que necesita sin fricción.
+                  </p>
+                  <button type="button" class="btn btn--brand service-card__btn">Ver más</button>
+                </div>
+              </article>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+              <article class="service-card">
+                <img
+                  src="https://picsum.photos/seed/aurum-dev/600/400"
+                  class="service-card__image"
+                  alt="Código fuente en una pantalla representando desarrollo web"
+                  loading="lazy"
+                />
+                <div class="service-card__body">
+                  <h3 class="service-card__title">Desarrollo Web</h3>
+                  <p class="service-card__text">
+                    Sitios y aplicaciones rápidas, seguras y escalables, construidas con
+                    buenas prácticas de código.
+                  </p>
+                  <button type="button" class="btn btn--brand service-card__btn">Ver más</button>
+                </div>
+              </article>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+              <article class="service-card">
+                <img
+                  src="https://picsum.photos/seed/aurum-estrategia/600/400"
+                  class="service-card__image"
+                  alt="Gráficos y métricas representando estrategia digital"
+                  loading="lazy"
+                />
+                <div class="service-card__body">
+                  <h3 class="service-card__title">Estrategia Digital</h3>
+                  <p class="service-card__text">
+                    Planificamos cada paso con datos reales para que tu marca crezca de
+                    forma sostenida.
+                  </p>
+                  <button type="button" class="btn btn--brand service-card__btn">Ver más</button>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SECCIÓN 2: TRABAJO (container solo para márgenes + CSS Grid con grid-areas) ============ -->
+      <!-- BEM: bloque "section" + modificador "section--work" -->
+      <section id="trabajo" class="section section--work" aria-labelledby="trabajo-titulo">
+        <div class="container">
+          <h2 id="trabajo-titulo" class="section__title">Nuestro trabajo</h2>
+
+          <!-- BEM: bloque "work-grid" (2 filas x 3 columnas con CSS Grid + grid-template-areas) -->
+          <div class="work-grid">
+            <div class="work-grid__item work-grid__item--a">
+              <div class="work-grid__text"><p>Branding</p></div>
+              <img
+                src="https://picsum.photos/seed/aurum-branding/700/500"
+                class="work-grid__image"
+                alt="Proyecto de branding para un cliente ficticio"
+                loading="lazy"
+              />
+            </div>
+            <div class="work-grid__item work-grid__item--b">
+              <div class="work-grid__text"><p>E-commerce</p></div>
+              <img
+                src="https://picsum.photos/seed/aurum-ecommerce/500/900"
+                class="work-grid__image"
+                alt="Proyecto de tienda online"
+                loading="lazy"
+              />
+            </div>
+            <div class="work-grid__item work-grid__item--c">
+              <div class="work-grid__text"><p>App Móvil</p></div>
+              <img
+                src="https://picsum.photos/seed/aurum-app/500/500"
+                class="work-grid__image"
+                alt="Proyecto de aplicación móvil"
+                loading="lazy"
+              />
+            </div>
+            <div class="work-grid__item work-grid__item--d">
+              <div class="work-grid__text"><p>Estrategia</p></div>
+              <img
+                src="https://picsum.photos/seed/aurum-strategy/500/500"
+                class="work-grid__image"
+                alt="Proyecto de estrategia digital"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============ FOOTER: 3 columnas en una fila ============ -->
+    <!-- BEM: bloque "site-footer" -->
+    <footer class="site-footer" id="contacto">
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-md-4">
+            <a class="navbar-brand logo" href="#inicio">Aurum<span class="logo__accent">Studio</span></a>
+            <p class="site-footer__text">
+              Estudio de diseño y desarrollo digital. Ayudamos a marcas a construir su
+              presencia online desde cero.
+            </p>
+          </div>
+
+          <div class="col-md-4">
+            <h3 class="site-footer__title">Enlaces</h3>
+            <ul class="list-unstyled site-footer__links">
+              <li><a href="#inicio">Inicio</a></li>
+              <li><a href="#servicios">Servicios</a></li>
+              <li><a href="#trabajo">Nosotros</a></li>
+              <li><a href="#contacto">Contacto</a></li>
+            </ul>
+          </div>
+
+          <div class="col-md-4">
+            <h3 class="site-footer__title">Seguinos</h3>
+            <ul class="list-inline site-footer__social">
+              <li class="list-inline-item">
+                <a href="#" aria-label="Instagram de Aurum Studio"><i class="bi bi-instagram"></i></a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#" aria-label="X (Twitter) de Aurum Studio"><i class="bi bi-twitter-x"></i></a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#" aria-label="LinkedIn de Aurum Studio"><i class="bi bi-linkedin"></i></a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#" aria-label="Facebook de Aurum Studio"><i class="bi bi-facebook"></i></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="site-footer__copy">&copy; 2026 Aurum Studio. Todos los derechos reservados.</p>
+      </div>
+    </footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

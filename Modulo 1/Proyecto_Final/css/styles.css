@@ -1,0 +1,383 @@
+/* Tipografía Poppins traída desde Google Fonts (debe ir primero en el archivo) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* ==========================================================================
+   CONVENCIÓN DE NOMBRES: BEM (Block Element Modifier)
+   --------------------------------------------------------------------------
+   Todas las clases CREADAS POR NOSOTROS (no las de Bootstrap) siguen BEM:
+     .bloque              -> componente independiente y reutilizable
+     .bloque__elemento    -> parte interna del bloque, no existe sola
+     .bloque--modificador -> variante del bloque (cambia look o comportamiento)
+   Ejemplo en este archivo: .service-card (bloque), .service-card__title
+   (elemento), .section--work (modificador del bloque .section).
+   Las clases de Bootstrap (.navbar, .btn, .row, .col-*, etc.) se dejan tal
+   cual, ya que pertenecen a su propia librería y no debemos renombrarlas.
+   ========================================================================== */
+
+/* ==========================================================================
+   1. PALETA DE COLORES Y VARIABLES PROPIAS
+   Definimos nuestras propias CSS Custom Properties para no repetir valores
+   hexadecimales por todo el archivo. Esto es independiente de Bootstrap.
+   ========================================================================== */
+:root {
+  --color-blanco: #FFFFFF;   /* Fondos claros y texto sobre fondos oscuros */
+  --color-negro: #000000;    /* Sombras y acentos puntuales */
+  --color-dorado: #CCAA4B;   /* Color de marca / acento principal */
+  --color-oscuro: #262933;   /* Fondo del navbar, footer y textos fuertes */
+  --color-gris: #585858;     /* Texto secundario / descripciones */
+  --fuente-principal: 'Poppins', sans-serif; /* Tipografía única del sitio */
+}
+
+/* ==========================================================================
+   2. CUSTOMIZACIÓN DE BOOTSTRAP (sin recompilar Sass)
+   --------------------------------------------------------------------------
+   PROCEDIMIENTO:
+   Como bootstrap.min.css viene ya compilado desde el CDN, no tenemos acceso
+   a las variables Sass ($primary, $navbar-dark-color, etc.). Sin embargo,
+   desde Bootstrap 5.2+ el CSS compilado usa internamente CSS Custom
+   Properties (variables nativas del navegador) con el prefijo --bs-*.
+   La estrategia entonces es: cargar bootstrap.min.css primero y, después,
+   SOBRESCRIBIR esas variables --bs-* en nuestro propio CSS. El navegador
+   respeta la última definición en cascada, así que nuestros valores ganan.
+   Esto NO reduce ni modifica el archivo de Bootstrap: solo "pisa" los
+   valores que ese componente usa.
+   ========================================================================== */
+
+/* --- 2.1 Variables globales de Bootstrap (afectan a todo el sitio) --- */
+:root {
+  --bs-primary: var(--color-dorado);           /* Pisa el color "primary" global (botones, texto, bordes .primary) */
+  --bs-primary-rgb: 204, 170, 75;               /* Versión RGB del dorado: Bootstrap la usa para generar rgba() en focos/sombras */
+  --bs-link-color: var(--color-dorado);         /* Color por defecto de los enlaces <a> */
+  --bs-link-hover-color: var(--color-oscuro);   /* Color de los enlaces al pasar el mouse */
+  --bs-link-color-rgb: 204, 170, 75;            /* RGB del color de enlace (requerido por Bootstrap) */
+  --bs-link-hover-color-rgb: 38, 41, 51;        /* RGB del color de enlace en hover */
+  --bs-body-font-family: var(--fuente-principal); /* Tipografía global que usa el Reboot de Bootstrap */
+  --bs-body-color: var(--color-oscuro);         /* Color de texto por defecto del body */
+}
+
+/* --- 2.2 Navbar: cada componente de Bootstrap trae SUS PROPIAS variables locales --- */
+/* BEM: bloque ".site-nav". Al aplicar estas variables sobre esta clase, el   */
+/* cambio queda acotado solo a nuestro menú y no afecta otros navbars.       */
+.site-nav {
+  --bs-navbar-color: var(--color-blanco);            /* Color de los links inactivos del menú */
+  --bs-navbar-hover-color: var(--color-dorado);       /* Color de los links en hover */
+  --bs-navbar-active-color: var(--color-dorado);      /* Color del link activo (aria-current="page") */
+  --bs-navbar-disabled-color: var(--color-gris);      /* Color de un link deshabilitado */
+  --bs-navbar-brand-color: var(--color-blanco);       /* Color del logo textual */
+  --bs-navbar-brand-hover-color: var(--color-dorado); /* Color del logo al pasar el mouse */
+  --bs-navbar-toggler-border-color: rgba(255,255,255,.25); /* Borde del botón hamburguesa */
+  background-color: var(--color-oscuro); /* Fondo del menú completo */
+  padding-top: .9rem;    /* Aire arriba del contenido del navbar */
+  padding-bottom: .9rem; /* Aire abajo del contenido del navbar */
+}
+
+/* Ícono hamburguesa: Bootstrap lo dibuja con un SVG embebido en la variable --bs-navbar-toggler-icon-bg. */
+/* Lo redefinimos en blanco (%23fff = "#fff" codificado en URL) para que se vea sobre el fondo oscuro.    */
+/* Nota: .navbar-toggler-icon es una clase de Bootstrap; la escopamos dentro de nuestro bloque .site-nav. */
+.site-nav .navbar-toggler-icon {
+  --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,0.85)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* --- 2.3 Botones: modificador "--brand" que se combina con el .btn de Bootstrap --- */
+/* Este es el patrón oficial de Bootstrap 5.3 para crear una variante de botón   */
+/* sin tocar Sass: se define una clase y se sobrescriben solo sus variables.     */
+/* BEM: técnicamente .btn es un bloque de Bootstrap, no nuestro; por eso         */
+/* nombramos nuestra clase como modificador "--brand" y siempre se usa junto    */
+/* a .btn en el HTML (ej: class="btn btn--brand"), nunca sola.                  */
+.btn--brand {
+  --bs-btn-color: var(--color-oscuro);          /* Color del texto en estado normal */
+  --bs-btn-bg: var(--color-dorado);             /* Fondo en estado normal */
+  --bs-btn-border-color: var(--color-dorado);   /* Borde en estado normal */
+  --bs-btn-hover-color: var(--color-blanco);    /* Color del texto en hover */
+  --bs-btn-hover-bg: var(--color-oscuro);       /* Fondo en hover */
+  --bs-btn-hover-border-color: var(--color-oscuro); /* Borde en hover */
+  --bs-btn-active-color: var(--color-blanco);   /* Color del texto al hacer click */
+  --bs-btn-active-bg: #1b1d24;                  /* Fondo al hacer click (oscuro más profundo) */
+  --bs-btn-active-border-color: #1b1d24;        /* Borde al hacer click */
+  --bs-btn-focus-shadow-rgb: 204, 170, 75;      /* Color del resplandor de foco (accesibilidad de teclado) */
+  font-weight: 600;     /* Texto un poco más grueso para destacar el CTA */
+  letter-spacing: .02em; /* Pequeño espaciado entre letras */
+}
+
+/* ==========================================================================
+   3. RESET Y BASE
+   ========================================================================== */
+* {
+  box-sizing: border-box; /* El padding y el borde no suman al ancho total declarado */
+}
+
+body {
+  font-family: var(--fuente-principal); /* Redundante con --bs-body-font-family, pero explícito por claridad */
+  color: var(--color-oscuro); /* Color de texto por defecto */
+}
+
+/* Enlace "saltar al contenido": bloque BEM independiente, sin elementos ni modificadores */
+.skip-link {
+  background-color: var(--color-dorado); /* Fondo llamativo cuando aparece */
+  color: var(--color-oscuro); /* Texto legible sobre el fondo dorado */
+  padding: .5rem 1rem; /* Aire interno */
+  z-index: 1080; /* Por encima del navbar al recibir foco */
+}
+
+/* --- BEM: bloque ".logo" (el logo textual, se reutiliza en el navbar y en el footer) --- */
+.logo__accent {
+  color: var(--color-dorado); /* Color diferenciado para la segunda palabra del logo ("Studio") */
+}
+
+/* ==========================================================================
+   4. SECTION (bloque genérico de espaciado + modificadores por sección)
+   ========================================================================== */
+.section {
+  padding-top: 4rem;    /* Aire superior de cualquier sección que use este bloque */
+  padding-bottom: 4rem; /* Aire inferior de cualquier sección que use este bloque */
+}
+
+.section--work {
+  background-color: #f7f6f4; /* Modificador: tono neutro para diferenciar la sección de trabajo */
+}
+
+.section__title {
+  color: var(--color-oscuro); /* Los títulos de sección usan el color oscuro de marca */
+  font-weight: 700; /* Peso fuerte para jerarquía visual */
+  margin-bottom: 2rem; /* Separación respecto al contenido de la sección */
+  text-align: center; /* Centrado dentro del container */
+}
+
+/* ==========================================================================
+   5. HERO (dentro del header, debajo del navbar)
+   ========================================================================== */
+.hero {
+  background-color: var(--color-oscuro); /* Color de base debajo de la imagen */
+  background-image:
+    linear-gradient(rgba(38, 41, 51, 0.75), rgba(38, 41, 51, 0.75)), /* Capa oscura para dar contraste al texto */
+    url('https://picsum.photos/seed/aurum-hero/1600/900'); /* Imagen de fondo del hero */
+  background-size: cover;      /* La imagen cubre todo el contenedor */
+  background-position: center; /* La imagen se centra dentro del contenedor */
+  color: var(--color-blanco);  /* Texto en blanco para contrastar con el fondo oscuro */
+  padding-top: 6rem;    /* Aire superior generoso, look "hero" */
+  padding-bottom: 6rem; /* Aire inferior generoso */
+}
+
+.hero__title {
+  font-weight: 700;      /* Título bien marcado */
+  margin-bottom: 1rem;   /* Separación respecto a la descripción */
+}
+
+.hero__text {
+  color: rgba(255, 255, 255, 0.85); /* Blanco levemente atenuado para jerarquía respecto del título */
+  margin-bottom: 1.75rem; /* Separación respecto al botón CTA */
+  font-size: 1.05rem; /* Levemente más grande que el texto base */
+}
+
+/* ==========================================================================
+   6. SERVICE-CARD (estructura general = Bootstrap row/col,
+      maquetación interna = Flexbox en CSS plano)
+   ========================================================================== */
+.service-card {
+  display: flex;             /* Flexbox para poder alinear imagen + cuerpo en columna */
+  flex-direction: column;     /* Imagen arriba, cuerpo de texto abajo */
+  height: 100%;               /* Todas las tarjetas de la fila igualan su altura */
+  background-color: var(--color-blanco); /* Fondo blanco de la tarjeta */
+  border: 1px solid #e7e5e1;  /* Borde sutil */
+  border-radius: .6rem;       /* Bordes redondeados */
+  overflow: hidden;           /* La imagen no se sale de los bordes redondeados */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .06); /* Sombra suave para dar profundidad */
+  transition: transform .2s ease, box-shadow .2s ease; /* Transición suave para el hover */
+}
+
+.service-card:hover {
+  transform: translateY(-4px); /* La tarjeta se eleva levemente al pasar el mouse */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, .1); /* Sombra más marcada en hover */
+}
+
+.service-card__image {
+  width: 100%;       /* La imagen ocupa todo el ancho de la tarjeta */
+  height: 200px;      /* Altura fija para que todas las imágenes midan igual */
+  object-fit: cover;  /* Recorta la imagen manteniendo su proporción, sin deformarla */
+}
+
+.service-card__body {
+  display: flex;           /* Flexbox también dentro del cuerpo de texto */
+  flex-direction: column;  /* Título, texto y botón apilados verticalmente */
+  flex: 1 1 auto;          /* El cuerpo ocupa todo el espacio restante de la tarjeta */
+  padding: 1.5rem;         /* Aire interno del cuerpo */
+}
+
+.service-card__title {
+  color: var(--color-oscuro); /* Título en el color oscuro de marca */
+  font-weight: 600;           /* Peso semi-fuerte */
+  margin-bottom: .6rem;       /* Separación respecto al texto descriptivo */
+}
+
+.service-card__text {
+  color: var(--color-gris);  /* Texto secundario en gris */
+  flex: 1 1 auto;            /* Empuja el botón hacia abajo si el texto es corto */
+  margin-bottom: 1.25rem;    /* Separación respecto al botón */
+}
+
+.service-card__btn {
+  align-self: flex-start; /* El botón no ocupa todo el ancho, solo lo necesario */
+  margin-top: auto;       /* Ancla el botón siempre al final de la tarjeta (flexbox) */
+}
+
+/* ==========================================================================
+   7. WORK-GRID (container de Bootstrap solo para márgenes,
+      estructura interna = CSS Grid con grid-template-areas)
+   ========================================================================== */
+.work-grid {
+  display: grid; /* Activa el contexto de grid */
+  grid-template-columns: repeat(3, 1fr); /* 3 columnas de igual ancho */
+  grid-template-rows: repeat(2, minmax(180px, 1fr)); /* 2 filas de altura flexible */
+  gap: 1rem; /* Espacio entre celdas, tanto horizontal como vertical */
+  /* Definimos el "mapa" visual de la grilla con nombres de área:      */
+  /* "a" ocupa las 2 primeras columnas de la fila 1;                  */
+  /* "b" ocupa la columna 3 completa, atravesando ambas filas;        */
+  /* "c" y "d" completan la fila 2 en las columnas 1 y 2.             */
+  grid-template-areas:
+    "a a b"
+    "c d b";
+}
+
+.work-grid__item {
+  position: relative;   /* Contexto para posicionar la imagen y el texto superpuestos */
+  overflow: hidden;     /* Recorta la imagen a los bordes de la celda */
+  border-radius: .6rem; /* Bordes redondeados de cada celda */
+  background-color: var(--color-oscuro); /* Fondo visible mientras carga la imagen */
+  min-height: 180px; /* Alto mínimo para que se note bien el efecto hover */
+}
+
+/* Modificadores: asignan cada celda HTML a su área nombrada dentro del grid */
+.work-grid__item--a { grid-area: a; }
+.work-grid__item--b { grid-area: b; }
+.work-grid__item--c { grid-area: c; }
+.work-grid__item--d { grid-area: d; }
+
+/* Texto de fondo: vive DEBAJO de la imagen y se revela cuando la imagen se aclara */
+.work-grid__text {
+  position: absolute; /* Se ubica ocupando toda la celda */
+  inset: 0;            /* Atajo de top/right/bottom/left en 0 */
+  display: flex;              /* Flexbox en CSS plano para centrar el texto */
+  align-items: center;        /* Centrado vertical */
+  justify-content: center;    /* Centrado horizontal */
+  padding: 1rem; /* Aire interno para que el texto no toque los bordes */
+  z-index: 1; /* Queda por debajo de la imagen (que tiene z-index mayor) */
+}
+
+.work-grid__text p {
+  color: var(--color-dorado); /* Texto en dorado sobre el fondo oscuro */
+  font-weight: 600;           /* Texto destacado */
+  text-transform: uppercase;  /* Estilo de etiqueta */
+  letter-spacing: .06em;      /* Espaciado entre letras */
+  text-align: center;         /* Centrado del texto */
+  margin: 0;                  /* Sin margen extra dentro del flex container */
+}
+
+/* Imagen "opaca": tapa el texto por defecto y se aclara al pasar el mouse */
+.work-grid__image {
+  position: absolute; /* Se superpone exactamente sobre el texto de fondo */
+  inset: 0;            /* Ocupa toda la celda */
+  width: 100%;         /* Ancho completo de la celda */
+  height: 100%;        /* Alto completo de la celda */
+  object-fit: cover;   /* Recorta manteniendo proporción */
+  z-index: 2;          /* Por encima del texto */
+  opacity: .92;                       /* Casi opaca por defecto, oculta el texto de abajo */
+  filter: grayscale(35%) brightness(.85); /* Look apagado para reforzar la sensación de "opaca" */
+  transition: opacity .4s ease, filter .4s ease; /* Transición suave al pasar el mouse */
+}
+
+/* Al pasar el mouse (o enfocar con teclado) la imagen se aclara y deja ver el texto */
+.work-grid__item:hover .work-grid__image,
+.work-grid__item:focus-within .work-grid__image {
+  opacity: .15;                 /* La imagen casi desaparece */
+  filter: grayscale(0%) brightness(1); /* Recupera sus colores originales mientras se desvanece */
+}
+
+/* ==========================================================================
+   8. SITE-FOOTER (3 columnas en una fila, con Bootstrap row/col)
+   ========================================================================== */
+.site-footer {
+  background-color: var(--color-oscuro); /* Mismo color oscuro que el navbar, para dar coherencia visual */
+  color: var(--color-blanco);            /* Texto en blanco sobre el fondo oscuro */
+  padding-top: 3rem;    /* Aire superior del footer */
+  padding-bottom: 2rem; /* Aire inferior del footer */
+}
+
+.site-footer .navbar-brand {
+  color: var(--color-blanco); /* Logo en blanco dentro del footer */
+  display: inline-block;      /* Para que el margin-bottom funcione correctamente */
+  margin-bottom: .75rem;      /* Separación respecto al texto descriptivo */
+}
+
+.site-footer__text {
+  color: rgba(255, 255, 255, 0.75); /* Texto secundario, blanco atenuado */
+  font-size: .95rem; /* Levemente más chico que el texto base */
+}
+
+.site-footer__title {
+  color: var(--color-dorado); /* Subtítulos de columna en dorado, para jerarquía */
+  font-size: 1.05rem; /* Tamaño moderado, no compite con el h1 del hero */
+  font-weight: 600;   /* Peso semi-fuerte */
+  margin-bottom: 1rem; /* Separación respecto a la lista debajo */
+}
+
+.site-footer__links li {
+  margin-bottom: .5rem; /* Separación entre cada enlace del footer */
+}
+
+.site-footer__links a {
+  color: rgba(255, 255, 255, 0.8); /* Color de los enlaces del footer */
+  text-decoration: none;           /* Sin subrayado por defecto */
+}
+
+.site-footer__links a:hover {
+  color: var(--color-dorado); /* Color dorado al pasar el mouse, coherente con el navbar */
+  text-decoration: underline; /* Subrayado en hover para reforzar que es interactivo */
+}
+
+.site-footer__social a {
+  color: var(--color-blanco); /* Íconos en blanco por defecto */
+  font-size: 1.3rem;          /* Tamaño cómodo para tocar en mobile */
+  display: inline-block;      /* Permite aplicar transform sin romper el flujo */
+  transition: color .2s ease, transform .2s ease; /* Transición suave en hover */
+}
+
+.site-footer__social a:hover {
+  color: var(--color-dorado);  /* Ícono dorado en hover */
+  transform: translateY(-2px); /* Pequeño efecto de "levantamiento" */
+}
+
+.site-footer__copy {
+  border-top: 1px solid rgba(255, 255, 255, 0.15); /* Línea divisoria sutil */
+  color: rgba(255, 255, 255, 0.6); /* Texto legal bien atenuado */
+  font-size: .85rem;   /* Texto pequeño, típico de línea de copyright */
+  margin-top: 2rem;    /* Separación respecto a las columnas de arriba */
+  padding-top: 1.5rem; /* Aire respecto a la línea divisoria */
+  text-align: center;  /* Centrado en toda la fila */
+}
+
+/* ==========================================================================
+   9. RESPONSIVE
+   ========================================================================== */
+@media (max-width: 767.98px) {
+  .hero {
+    padding-top: 4rem;    /* Reducimos el aire vertical en pantallas chicas */
+    padding-bottom: 4rem;
+    text-align: center; /* Centramos el texto del hero en mobile */
+  }
+
+  .work-grid {
+    grid-template-columns: repeat(2, 1fr); /* En mobile pasamos de 3 a 2 columnas */
+    grid-template-areas:
+      "a a"
+      "b b"
+      "c d"; /* Reordenamos el mapa de áreas para la grilla angosta */
+  }
+
+  .site-footer {
+    text-align: center; /* Centramos las columnas del footer en mobile */
+  }
+
+  .site-footer__social {
+    padding-left: 0; /* Quita el padding heredado de list-inline en el centrado mobile */
+  }
+}
