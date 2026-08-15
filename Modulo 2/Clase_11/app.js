@@ -66,11 +66,11 @@ if (!estaRegistrado && edad > 18) {
 
 //condicion ? valor_si_es_verdadera : valor_si_es_falsa
 
-/* let edad = 18;
+let edad = 18;
 
 let esMayor = edad >= 18 ? "Sos mayor" : "Eres menor de edad";
 console.log(esMayor);
-console.log(edad >= 18 ? "Sos mayor" : "Eres menor de edad"); */
+console.log(edad >= 18 ? "Sos mayor" : "Eres menor de edad");
 
 /* -------------------------------------------- */
 
