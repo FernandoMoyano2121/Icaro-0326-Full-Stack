@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .div {
+      background-color: antiquewhite;
+      width: 100px;
+      height: 100px;
+      margin-top: 3rem;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    .input {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-bottom: 1rem;
+      /*   align-items: center; */
+    }
+    button {
+      width: 100px;
+      display: block;
+      margin-top: 1rem;
+    }
+    .resultado {
+      background-color: beige;
+      display: flex;
+      flex-direction: column;
+      margin-top: 1rem;
+    }
+    /* ************ ecommerce *******************/
+    .contenedorProductos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+    }
+    /* --- Estilos de la tarjeta --- */
+    .producto {
+      width: 200px;
+      padding: 15px;
+      border-radius: 12px;
+      background: #f4f4f4;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      font-family: Arial;
+      margin-bottom: 20px;
+    }
+
+    .producto img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .producto button {
+      background: #3498db;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .producto button:hover {
+      background: #2178b5;
+    }
+
+    /* --- Estilo lista --- */
+    #listaCompras {
+      margin-top: 20px;
+      font-family: Arial;
+      font-size: 1.1em;
+      padding-left: 0;
+    }
+
+    #listaCompras li {
+      list-style: none;
+      padding: 6px 10px;
+      background: #e8f0fe;
+      margin-bottom: 5px;
+      border-radius: 6px;
+    }
+  </style>
+  <body>
+    <!-- EVENTO CLICK -->
+
+    <!--  <button onclick="alert('Hola!')">Click me</button> -->
+    <!--  <button id="button">Click me</button> -->
+
+    <!-- EVENTO INPUT -->
+    <!--     <input id="input" type="text" placeholder="Ingresa tu nombre" />
+ -->
+    <!-- EVENTO MOUSEOVER -->
+    <!-- <div id="div" class="div"></div> -->
+
+    <!------------- PREVENTDEFAULT() ------------------>
+    <!--     <br />
+    <br />
+
+    <form id="miFormulario" action="">
+      <div class="input">
+        <label for="nombre">Nombre</label>
+        <input name="nombre" type="text" />
+      </div>
+
+      <div class="input">
+        <label for="email">Email</label>
+        <input name="email" type="email" />
+      </div>
+      <button type="submit">Enviar</button>
+    </form>
+
+    <div id="resultado"></div> -->
+
+    <!-- --------------------- ECCOMERCE  ------------------------>
+
+    <div class="contenedorProductos">
+      <!-- Producto 1 -->
+      <div class="producto">
+        <img src="https://placehold.co/100x100" alt="Producto" />
+        <h3>Mouse</h3>
+        <p>Precio: $30.000</p>
+        <button class="btnComprar" data-nombre="Mouse">Agregar</button>
+      </div>
+
+      <!-- Producto 2 -->
+      <div class="producto">
+        <img src="https://placehold.co/100x100" alt="Producto" />
+        <h3>Auriculares</h3>
+        <p>Precio: $100.000</p>
+        <button class="btnComprar" data-nombre="Auriculares">Agregar</button>
+      </div>
+    </div>
+
+    <!-- Lista de prodductos -->
+    <h3>Carrito de compras</h3>
+    <ul id="listaCompras">
+      <!-- ... items de la lista-->
+    </ul>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
