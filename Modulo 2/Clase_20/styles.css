@@ -1,0 +1,11 @@
+.parrafo {
+  width: 100px;
+  height: 100px;
+  background-color: tomato;
+  color: aliceblue;
+}
+
+.contenedorTitulo {
+  padding: 2rem;
+  background-color: antiquewhite;
+}
