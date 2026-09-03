@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clase_21</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        padding: 40px;
+      }
+
+      h1 {
+        color: #333;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+
+      .subtitle {
+        text-align: center;
+        color: #666;
+        margin-bottom: 30px;
+        font-size: 14px;
+      }
+
+      .search-section {
+        background: #f8f9fa;
+        padding: 30px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+        border-left: 4px solid #667eea;
+      }
+
+      .search-section h2 {
+        color: #333;
+        margin-bottom: 20px;
+        font-size: 18px;
+      }
+
+      .search-group {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      input[type="text"] {
+        flex: 1;
+        min-width: 200px;
+        padding: 12px 15px;
+        border: 2px solid #ddd;
+        border-radius: 5px;
+        font-size: 14px;
+        transition: border-color 0.3s;
+      }
+
+      input[type="text"]:focus {
+        outline: none;
+        border-color: #667eea;
+      }
+
+      input[type="text"]::placeholder {
+        color: #999;
+      }
+
+      button {
+        padding: 12px 30px;
+        background: #667eea;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        transition: all 0.3s;
+      }
+
+      button:hover {
+        background: #764ba2;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+      }
+
+      button:active {
+        transform: translateY(0);
+      }
+
+      .result {
+        background: #f8f9fa;
+        padding: 30px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+        border: 2px solid #e0e0e0;
+        min-height: 60px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .result h2 {
+        color: #333;
+        margin: 15px 0 10px;
+        font-size: 22px;
+      }
+
+      .result p {
+        color: #666;
+        margin: 8px 0;
+        font-size: 14px;
+      }
+
+      .result img {
+        max-width: 100%;
+        height: auto;
+        margin: 15px 0;
+        border-radius: 8px;
+        background: white;
+        padding: 10px;
+      }
+
+      .console-info {
+        background: #1e1e1e;
+        color: #d4d4d4;
+        padding: 20px;
+        border-radius: 8px;
+        font-family: "Courier New", monospace;
+        font-size: 13px;
+        line-height: 1.6;
+        margin-top: 30px;
+        border-left: 4px solid #764ba2;
+        max-height: 300px;
+        overflow-y: auto;
+      }
+
+      .console-info h3 {
+        color: #4ec9b0;
+        margin-bottom: 10px;
+      }
+
+      .console-info p {
+        margin: 5px 0;
+      }
+
+      .tip {
+        background: #e7f3ff;
+        border-left: 4px solid #2196f3;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 20px 0;
+        color: #1565c0;
+        font-size: 14px;
+      }
+
+      .tip strong {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          padding: 20px;
+        }
+
+        .search-group {
+          flex-direction: column;
+        }
+
+        input[type="text"] {
+          min-width: 100%;
+        }
+
+        h1 {
+          font-size: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="search-section">
+        <h2>🔍Búsqueda de Pokémon</h2>
+        <p style="color: #666; margin-bottom: 15px">
+          Busca cualquier pokémon y verás cómo funciona async/await con una API
+          real
+        </p>
+        <div class="search-group">
+          <input
+            type="text"
+            id="nombrePokemon"
+            placeholder="Ej: pikachu, charizard, dragonite..."
+          />
+          <button id="buscarBtn">Buscar Pokémon</button>
+        </div>
+      </div>
+      <div id="resultado">
+        <!-- Acá se inserta la tarjeta/card del pokemon -->
+      </div>
+    </div>
+    <script src="./app.js"></script>
+  </body>
+</html>
