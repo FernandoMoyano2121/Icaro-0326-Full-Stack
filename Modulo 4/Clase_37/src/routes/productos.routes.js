@@ -25,7 +25,7 @@ router.post("/", (req, res) => {
   });
 });
 
-router.put("/:id", (req, res) => {
+router.patch("/:id", (req, res) => {
   const id = Number(req.params.id);
   const datosActualizados = req.body;
 
