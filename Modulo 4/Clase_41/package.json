@@ -1,0 +1,9 @@
+{
+  "type": "module",
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "express": "^5.3.0",
+    "express-session": "^1.19.0"
+  }
+}

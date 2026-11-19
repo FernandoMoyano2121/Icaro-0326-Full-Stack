@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clase 41 - Cookies y Sesiones</title>
+    <style>
+      /* Estilos básicos para visualizar mejor los ejemplos */
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+        background: #f5f5f5;
+      }
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+      h2 {
+        color: #2196f3;
+        border-bottom: 2px solid #2196f3;
+        padding-bottom: 5px;
+      }
+
+      /* Contenedor de cada ejemplo */
+      .ejemplo {
+        background: white;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Formulario */
+      .form-group {
+        margin: 15px 0;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+      input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+
+      /* Botones */
+      .botones {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin: 15px 0;
+      }
+      button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: opacity 0.2s;
+      }
+      button:hover {
+        opacity: 0.8;
+      }
+      .btn-login {
+        background: #4caf50;
+        color: white;
+      }
+      .btn-dashboard {
+        background: #2196f3;
+        color: white;
+      }
+      .btn-logout {
+        background: #f44336;
+        color: white;
+      }
+      .btn-ver {
+        background: #ff9800;
+        color: white;
+      }
+
+      /* Resultado */
+      .resultado {
+        background: #263238;
+        color: #4caf50;
+        padding: 15px;
+        border-radius: 4px;
+        font-family: monospace;
+        white-space: pre-wrap;
+        min-height: 60px;
+      }
+      .resultado.error {
+        color: #f44336;
+      }
+
+      /* Explicación */
+      .explicacion {
+        background: #e3f2fd;
+        padding: 15px;
+        border-radius: 4px;
+        margin: 10px 0;
+        border-left: 4px solid #2196f3;
+      }
+      .explicacion code {
+        background: #bbdefb;
+        padding: 2px 6px;
+        border-radius: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🍪 Clase 41: Cookies y Sesiones</h1>
+
+    <!-- ============================================================
+       EJEMPLO 1: COOKIES MANUALES
+       ============================================================ -->
+    <div class="ejemplo">
+      <h2>Ejemplo 1: Login con Cookies Manuales</h2>
+
+      <div class="explicacion">
+        <strong>¿Cómo funciona?</strong><br />
+        El nombre del usuario se guarda
+        <strong>directamente en la cookie</strong> del navegador. <br /><br />
+        <code>res.cookie("usuario", "Fernando")</code> → El navegador almacena:
+        <code>usuario=Fernando</code>
+      </div>
+
+      <div class="form-group">
+        <label for="usuario-cookie">Nombre de usuario:</label>
+        <input
+          type="text"
+          id="usuario-cookie"
+          placeholder="Ej: Fernando"
+          value="Fernando"
+        />
+      </div>
+
+      <div class="botones">
+        <button class="btn-login" onclick="cookieLogin()">🔐 Login</button>
+        <button class="btn-dashboard" onclick="cookieDashboard()">
+          📊 Dashboard
+        </button>
+        <button class="btn-logout" onclick="cookieLogout()">🚪 Logout</button>
+        <button class="btn-ver" onclick="cookieVer()">👁️ Ver Cookies</button>
+      </div>
+
+      <div class="resultado" id="resultado-cookie">
+        Resultado aparecerá aquí...
+      </div>
+    </div>
+
+    <!-- ============================================================
+       EJEMPLO 2: EXPRESS-SESSION
+       ============================================================ -->
+    <div class="ejemplo">
+      <h2>Ejemplo 2: Login con Express-Session</h2>
+
+      <div class="explicacion">
+        <strong>¿Cómo funciona?</strong><br />
+        Los datos se guardan <strong>en el servidor</strong>. El navegador solo
+        recibe un ID de sesión. <br /><br />
+        <code>req.session.usuario = "Fernando"</code> → Servidor guarda los
+        datos
+        <br />
+        El navegador solo recibe: <code>connect.sid=abc123...</code>
+      </div>
+
+      <div class="form-group">
+        <label for="usuario-session">Nombre de usuario:</label>
+        <input
+          type="text"
+          id="usuario-session"
+          placeholder="Ej: Fernando"
+          value="Fernando"
+        />
+      </div>
+
+      <div class="botones">
+        <button class="btn-login" onclick="sessionLogin()">🔐 Login</button>
+        <button class="btn-dashboard" onclick="sessionDashboard()">
+          📊 Dashboard
+        </button>
+        <button class="btn-logout" onclick="sessionLogout()">🚪 Logout</button>
+      </div>
+
+      <div class="resultado" id="resultado-session">
+        Resultado aparecerá aquí...
+      </div>
+    </div>
+
+    <!-- ============================================================
+       INSTRUCCIONES
+       ============================================================ -->
+    <div class="ejemplo">
+      <h2>📝 Instrucciones</h2>
+      <ol>
+        <li>
+          Asegúrate de que el servidor esté corriendo:
+          <code>node src/app.js</code>
+        </li>
+        <li>
+          <strong>Ejemplo 1 (Cookies Manuales):</strong> Puedes probar desde
+          Live Server (http://localhost:5500)
+        </li>
+        <li>
+          <strong>Ejemplo 2 (Express-Session):</strong> Debes acceder desde
+          <a href="http://localhost:3000/index.html"
+            >http://localhost:3000/index.html</a
+          >
+          (mismo origen)
+        </li>
+        <li>
+          Prueba el flujo:
+          <strong>Login → Dashboard → Logout → Dashboard</strong>
+        </li>
+        <li>
+          Observa las cookies en DevTools:
+          <strong>Application → Cookies</strong>
+        </li>
+      </ol>
+
+      <div class="explicacion">
+        <strong>🔍 ¿Qué observar en DevTools?</strong><br /><br />
+        <strong>Ejemplo 1 (Cookie Manual):</strong> Verás una cookie llamada
+        <code>usuario</code> con el valor real (ej: "Fernando") <br /><br />
+        <strong>Ejemplo 2 (Session):</strong> Verás una cookie llamada
+        <code>connect.sid</code> con un ID largo encriptado
+      </div>
+    </div>
+
+    <script>
+      // ==========================================================================
+      // CONFIGURACIÓN BASE
+      // ==========================================================================
+      // Para cookies manuales (Live Server y Express en distinto puerto): usar URL completa
+      // Para express-session (mismo origen): usar URL relativa
+      const API_URL_CROSS = "http://localhost:3000"; // Cookies manuales
+      const API_URL_SAME = ""; // Express-session (mismo origen)
+
+      // Función helper para mostrar resultados
+      function mostrarResultado(elementId, data, isError = false) {
+        const elemento = document.getElementById(elementId);
+        elemento.textContent = JSON.stringify(data, null, 2);
+        elemento.className = isError ? "resultado error" : "resultado";
+      }
+
+      // ==========================================================================
+      // EJEMPLO 1: FUNCIONES PARA COOKIES MANUALES
+      // ==========================================================================
+
+      /**
+       * LOGIN con cookie manual
+       * Envía el usuario al servidor, que responde con Set-Cookie
+       */
+      async function cookieLogin() {
+        const usuario = document.getElementById("usuario-cookie").value;
+
+        try {
+          const response = await fetch(`${API_URL_CROSS}/cookie/login`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include", // ⚠️ IMPORTANTE: Permite enviar/recibir cookies
+            body: JSON.stringify({ usuario }),
+          });
+
+          const data = await response.json();
+          mostrarResultado("resultado-cookie", data, !response.ok);
+        } catch (error) {
+          mostrarResultado("resultado-cookie", { error: error.message }, true);
+        }
+      }
+
+      /**
+       * DASHBOARD con cookie manual
+       * El navegador envía automáticamente la cookie "usuario"
+       */
+      async function cookieDashboard() {
+        try {
+          const response = await fetch(`${API_URL_CROSS}/cookie/dashboard`, {
+            method: "GET",
+            credentials: "include", // ⚠️ Envía las cookies almacenadas
+          });
+
+          const data = await response.json();
+          mostrarResultado("resultado-cookie", data, !response.ok);
+        } catch (error) {
+          mostrarResultado("resultado-cookie", { error: error.message }, true);
+        }
+      }
+
+      /**
+       * LOGOUT con cookie manual
+       * El servidor responde con una instrucción para eliminar la cookie
+       */
+      async function cookieLogout() {
+        try {
+          const response = await fetch(`${API_URL_CROSS}/cookie/logout`, {
+            method: "POST",
+            credentials: "include",
+          });
+
+          const data = await response.json();
+          mostrarResultado("resultado-cookie", data, !response.ok);
+        } catch (error) {
+          mostrarResultado("resultado-cookie", { error: error.message }, true);
+        }
+      }
+
+      /**
+       * VER COOKIES
+       * Muestra todas las cookies que el servidor recibe
+       */
+      async function cookieVer() {
+        try {
+          const response = await fetch(`${API_URL_CROSS}/cookie/ver`, {
+            method: "GET",
+            credentials: "include",
+          });
+
+          const data = await response.json();
+          mostrarResultado("resultado-cookie", data, !response.ok);
+        } catch (error) {
+          mostrarResultado("resultado-cookie", { error: error.message }, true);
+        }
+      }
+
+      // ==========================================================================
+      // EJEMPLO 2: FUNCIONES PARA EXPRESS-SESSION
+      // ==========================================================================
+
+      /**
+       * LOGIN con express-session
+       * El servidor guarda los datos y responde con cookie connect.sid
+       */
+      async function sessionLogin() {
+        const usuario = document.getElementById("usuario-session").value;
+
+        try {
+          const response = await fetch(`${API_URL_SAME}/session/login`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include", // ⚠️ IMPORTANTE para sesiones
+            body: JSON.stringify({ usuario }),
+          });
+
+          const data = await response.json();
+          mostrarResultado("resultado-session", data, !response.ok);
+        } catch (error) {
+          mostrarResultado("resultado-session", { error: error.message }, true);
+        }
+      }
+
+      /**
+       * DASHBOARD con express-session
+       * El navegador envía connect.sid, el servidor busca la sesión
+       */
+      async function sessionDashboard() {
+        try {
+          const response = await fetch(`${API_URL_SAME}/session/dashboard`, {
+            method: "GET",
+            credentials: "include",
+          });
+
+          const data = await response.json();
+          mostrarResultado("resultado-session", data, !response.ok);
+        } catch (error) {
+          mostrarResultado("resultado-session", { error: error.message }, true);
+        }
+      }
+
+      /**
+       * LOGOUT con express-session
+       * El servidor destruye la sesión y elimina la cookie
+       */
+      async function sessionLogout() {
+        try {
+          const response = await fetch(`${API_URL_SAME}/session/logout`, {
+            method: "POST",
+            credentials: "include",
+          });
+
+          const data = await response.json();
+          mostrarResultado("resultado-session", data, !response.ok);
+        } catch (error) {
+          mostrarResultado("resultado-session", { error: error.message }, true);
+        }
+      }
+    </script>
+  </body>
+</html>
