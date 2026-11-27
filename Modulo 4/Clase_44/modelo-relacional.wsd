@@ -1,0 +1,61 @@
+@startuml modelo-relacional-tienda
+!theme plain
+skinparam linetype ortho
+skinparam EntityBackgroundColor #f8f9fa
+skinparam EntityBorderColor #495057
+skinparam EntityFontName Consolas
+skinparam ArrowColor #495057
+skinparam ArrowThickness 1.5
+skinparam TitleFontSize 16
+skinparam TitleFontStyle bold
+
+title Modelo Relacional — Base de Datos: tienda
+
+entity "categorias" as CAT {
+    * id : INT <<PK>> <<AUTO_INCREMENT>>
+    --
+    * nombre : VARCHAR(80) <<UNIQUE>>
+    descripcion : TEXT
+}
+
+entity "productos" as PROD {
+    * id : INT <<PK>> <<AUTO_INCREMENT>>
+    --
+    * nombre : VARCHAR(150)
+    descripcion : TEXT
+    * precio : DECIMAL(10,2)
+    * stock : INT = 0
+    * activo : BOOLEAN = TRUE
+    creado_en : TIMESTAMP
+    actualizado_en : TIMESTAMP
+}
+
+entity "producto_categoria" as PC {
+    * producto_id : INT <<PK>> <<FK>>
+    * categoria_id : INT <<PK>> <<FK>>
+}
+
+' Relación productos → producto_categoria
+' Un producto puede aparecer en muchas filas de la tabla intermedia
+' pero cada fila pertenece a exactamente un producto
+PROD ||--o{ PC : "tiene"
+
+' Relación categorias → producto_categoria
+' Una categoría puede aparecer en muchas filas de la tabla intermedia
+' pero cada fila pertenece a exactamente una categoría
+CAT  ||--o{ PC : "agrupa"
+
+note bottom of PC
+    PK compuesta: (producto_id, categoria_id)
+    ON DELETE CASCADE en ambas FK
+    — si se borra un producto o una categoría,
+    sus filas aquí se eliminan automáticamente.
+end note
+
+note right of PROD
+    activo = FALSE → soft delete
+    El producto no se borra físicamente,
+    solo se oculta del catálogo.
+end note
+
+@enduml

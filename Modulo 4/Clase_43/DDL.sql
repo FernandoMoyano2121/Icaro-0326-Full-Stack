@@ -1,0 +1,21 @@
+CREATE DATABASE IF NOT EXISTS tienda;
+USE tienda;
+SELECT DATABASE();
+
+
+CREATE TABLE IF NOT EXISTS productos(
+    id INT NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(50) NOT NULL,
+    descripcion TEXT,
+    precio DECIMAL(10,2) NOT NULL,
+    stcok INT NOT NULL DEFAULT 0,
+    categoria VARCHAR(80) NOT NULL DEFAULT 'sin categoria',
+    activo BOOLEAN NOT NULL DEFAULT TRUE,
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    actualizado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    PRIMARY KEY(id)
+
+);
+
+DESCRIBE productos;
